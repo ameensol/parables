@@ -30,7 +30,6 @@ def clean_list(raw):
     return clean
 
 
-
 #### Verbs
 
 res = urllib2.urlopen("http://www.webresume.com/resumes/verbs.shtml").read()
