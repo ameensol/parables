@@ -11,7 +11,7 @@ An attempt at a python parable generator as seen on [xkcd](http://http://xkcd.co
 
 3. Generated parables will be displayed in parables.txt
 
-## My favorite Examples
+## My Favorite Examples
 
 > A computer has never aroused numberless chubby experience
 
