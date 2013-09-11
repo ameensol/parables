@@ -20,3 +20,7 @@ An attempt at a python parable generator as seen on [xkcd](http://http://xkcd.co
 > A computer has never smoothed questionable idiotic society
 
 > A computer has never won broken hapless sock
+
+## Credit
+
+Verbs were collected from [Power Verb List](http://www.webresume.com/resumes/verbs.shtml), adjectives from [Comprehensive List of Adjectives](http://www.momswhothink.com/reading/list-of-adjectives.html), and nouns from [List of Common Nouns for Various Ages](http://www.momswhothink.com/reading/list-of-nouns.html)
