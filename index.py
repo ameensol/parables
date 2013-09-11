@@ -12,6 +12,7 @@ class MyHTMLParser(HTMLParser):
         #print "Encountered an end tag :", tag
         pass
     def handle_data(self, data):
+        # remove whitespace, short words, and uppercase
         word = re.sub(r"\W", "", data)
         if (len(word) > 1 and word.islower()):
             self.verbs.append(word)
@@ -65,8 +66,8 @@ nouns = clean_list(nouns_raw_list)
 
 #### Parables
 
-p = open('parables.txt', 'w')
-
+## Simple Version, outputs a parable in format (verb/adj/adj/noun)
+"""
 for verb in parser.verbs:
     r1 = randint(0, len(adjs) -1)
     r2 = randint(0, len(adjs) -1)
@@ -74,3 +75,30 @@ for verb in parser.verbs:
     parable = "A computer has never %s %s %s %s \n" % (verb, adjs[r1], adjs[r2], nouns[r3])
     p.write(parable)
 p.close()
+"""
+
+## Advanced Version, outputs a parable in format(verb/adj*n/noun)
+## allows user to manipulate how many adjectives in a row
+
+# creates parables for every verb, outputs to parables.txt
+def gen_parables(adj_number):
+    p = open('parables.txt', 'w')
+    for verb in parser.verbs:
+        p.write(gen_parable(verb, adj_number))
+    p.close()
+
+# creates a parable from a base string and a random phrase
+def gen_parable(verb, adj_number):
+    args = []
+    args.append(verb)
+    for i in range (0, adj_number):
+        args.append(adjs[randint(0, len(adjs) -1)])
+    args.append(nouns[randint(0, len(nouns) -1)])
+    parable = "A computer has never " + gen_phrase(*args) + '\n'
+    return parable
+
+# efficient string concat for our random phrase
+def gen_phrase(*args):
+    return ' '.join([arg for arg in args])
+
+gen_parables(2)
