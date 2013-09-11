@@ -13,10 +13,20 @@ class MyHTMLParser(HTMLParser):
         pass
     def handle_data(self, data):
         word = re.sub(r"\W", "", data)
-        if (len(word) > 1):
-            self.words.append(word)
+        if (len(word) > 1 and word.islower()):
+            self.verbs.append(word)
             #print "Encountered a word: ", word
 
+
+#### Helper Functions
+
+# Takes a list of words and filters out short words and uppercase
+def clean_list(raw):
+    clean = []
+    for el in raw:
+        if(len(el) > 1 and el.islower()):
+            clean.append(el)
+    return clean
 
 
 
@@ -31,7 +41,7 @@ f.close()
 verbs = open('verbs.html', 'r').read()
 
 parser = MyHTMLParser()
-parser.words = []
+parser.verbs = []
 parser.feed(verbs)
 
 
@@ -41,10 +51,7 @@ adj_text = open('adj.txt', 'r').read()
 
 adjs_raw_list = adj_text.split()
 
-adjs = []
-for adj in adjs_raw_list:
-    if (len(adj) > 1): 
-        adjs.append(adj)
+adjs = clean_list(adjs_raw_list)
 
         
 #### Nouns
@@ -53,17 +60,14 @@ nouns_text = open('noun.txt', 'r').read()
 
 nouns_raw_list = nouns_text.split()
 
-nouns = []
-for noun in nouns_raw_list:
-    if (len(noun) > 1): 
-        nouns.append(noun)
+nouns = clean_list(nouns_raw_list)
 
 
 #### Parables
 
 p = open('parables.txt', 'w')
 
-for verb in parser.words:
+for verb in parser.verbs:
     r1 = randint(0, len(adjs) -1)
     r2 = randint(0, len(adjs) -1)
     r3 = randint(0, len(nouns) -1)
